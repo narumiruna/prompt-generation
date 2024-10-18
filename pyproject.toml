@@ -7,6 +7,10 @@ authors = ["narumi <toucans-cutouts0f@icloud.com>"]
 [tool.poetry.dependencies]
 python = "^3.11"
 openai = "^1.52.0"
+gradio = "^5.1.0"
+click = "^8.1.7"
+python-dotenv = "^1.0.1"
+loguru = "^0.7.2"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.3"
@@ -16,7 +20,7 @@ toml = "^0.10.2"
 mypy = "^1.12.0"
 
 [tool.poetry.scripts]
-prompt-generation = "prompt-generation.cli:main"
+prompt-generation = "prompt_generation.cli:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
