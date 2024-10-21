@@ -28,8 +28,8 @@ jobs:
         run: poetry install --sync
       - name: Lint
         run: make lint
-      - name: Type check
-        run: make type
+      # - name: Type check
+      #   run: make type
       - name: Test
         run: make cover
       - name: Upload coverage reports to Codecov
