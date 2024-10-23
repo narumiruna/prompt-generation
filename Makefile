@@ -1,20 +1,20 @@
 install:
-	poetry install
+	uv sync
 
 lint:
-	poetry run ruff check .
+	uv run ruff check .
 
 type:
-	poetry run mypy --install-types --non-interactive .
+	uv run mypy --install-types --non-interactive .
 
 test:
-	poetry run pytest -v -s --cov=. tests
+	uv run pytest -v -s --cov=. tests
 
 cover:
-	poetry run pytest -v -s --cov=. --cov-report=xml tests
+	uv run pytest -v -s --cov=. --cov-report=xml tests
 
 publish:
-	poetry build -f wheel
-	poetry publish
+	uv build wheel
+	uv publish
 
 .PHONY: lint test publish
