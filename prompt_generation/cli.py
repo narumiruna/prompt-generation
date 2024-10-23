@@ -1,15 +1,21 @@
+import os
+
 import gradio as gr
 from dotenv import find_dotenv
 from dotenv import load_dotenv
 from loguru import logger
 
 from .openai import create_completion
-from .prompt import META_PROMPT
+from .utils import load_text
 from .utils import save_text
 
+prompt_file = os.getenv("META_PROMPT", "prompts/meta_prompt.txt")
 
-def generate_response(message, history):
-    messages = [{"role": "system", "content": META_PROMPT}]
+SYSTEM_PROMPT = load_text(prompt_file)
+
+
+def generate_response(message, history) -> str:
+    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
     messages += history
     messages += [{"role": "user", "content": message}]
 
