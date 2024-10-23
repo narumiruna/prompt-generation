@@ -6,7 +6,7 @@ authors = ["narumi <toucans-cutouts0f@icloud.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-openai = "^1.52.0"
+openai = "^1.52.1"
 gradio = "^5.3.0"
 click = "^8.1.7"
 python-dotenv = "^1.0.1"
