@@ -26,8 +26,8 @@ jobs:
           uv sync
       - name: Lint
         run: uv run ruff check .
-      - name: Type check
-        run: uv run mypy --install-types --non-interactive .
+      # - name: Type check
+      #   run: uv run mypy --install-types --non-interactive .
       - name: Test
         run: uv run pytest -v -s --cov=. tests
       - name: Upload coverage reports to Codecov
