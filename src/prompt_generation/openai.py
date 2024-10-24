@@ -1,20 +1,13 @@
 import functools
 import os
 from collections.abc import Iterable
-from typing import Literal
 
 from loguru import logger
 from openai import OpenAI
 from openai.types.chat import ChatCompletionMessageParam
 from pydantic import BaseModel
-from typing_extensions import TypedDict
 
 MAX_CONTENT_LENGTH = 1_048_576
-
-
-class Message(TypedDict):
-    role: Literal["system", "user", "assistant"]
-    content: str
 
 
 @functools.cache
