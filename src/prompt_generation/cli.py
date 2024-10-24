@@ -1,9 +1,13 @@
 import os
+from collections.abc import Iterable
 
 import gradio as gr
 from dotenv import find_dotenv
 from dotenv import load_dotenv
 from loguru import logger
+from openai.types.chat import ChatCompletionMessageParam
+from openai.types.chat import ChatCompletionSystemMessageParam
+from openai.types.chat import ChatCompletionUserMessageParam
 
 from .openai import create_completion
 from .utils import load_text
@@ -14,10 +18,15 @@ prompt_file = os.getenv("META_PROMPT", "prompts/meta_prompt.txt")
 SYSTEM_PROMPT = load_text(prompt_file)
 
 
-def generate_response(message, history) -> str:
-    messages = [{"role": "system", "content": SYSTEM_PROMPT}]
-    messages += history
-    messages += [{"role": "user", "content": message}]
+def generate_response(message: str, history: list[dict[str, str]]) -> str:
+    messages: Iterable[ChatCompletionMessageParam] = [
+        ChatCompletionSystemMessageParam(role="system", content=SYSTEM_PROMPT),
+        *[
+            ChatCompletionUserMessageParam(role="user", content=history_message["content"])
+            for history_message in history
+        ],
+        ChatCompletionUserMessageParam(role="user", content=message),
+    ]
 
     logger.info("messages: {}", messages)
 
