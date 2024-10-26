@@ -9,7 +9,7 @@ from openai.types.chat import ChatCompletionMessageParam
 from openai.types.chat import ChatCompletionSystemMessageParam
 from openai.types.chat import ChatCompletionUserMessageParam
 
-from .openai import create_completion
+from .openai import create
 from .utils import load_text
 
 prompt_file = os.getenv("META_PROMPT", "prompts/meta_prompt.txt")
@@ -27,7 +27,7 @@ def generate_response(message: str, history: list[dict[str, str]]) -> tuple[str,
     logger.info("messages: {}", messages)
 
     try:
-        response = create_completion(messages)
+        response = create(messages)
         logger.info("response: {}", response)
         return "", history + [{"role": "user", "content": message}, {"role": "assistant", "content": response}]
     except Exception as e:

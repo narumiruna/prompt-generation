@@ -1,33 +1,40 @@
 import functools
 import os
 from collections.abc import Iterable
+from typing import Final
 
 from loguru import logger
 from openai import OpenAI
 from openai.types.chat import ChatCompletionMessageParam
 from pydantic import BaseModel
 
-MAX_CONTENT_LENGTH = 1_048_576
+DEFAULT_MODEL: Final[str] = "gpt-4o-mini"
+DEFAULT_TEMPERATURE: Final[float] = 0.0
 
 
 @functools.cache
-def get_openai_client() -> OpenAI:
+def get_client() -> OpenAI:
     return OpenAI()
 
 
 @functools.cache
-def get_openai_model() -> str:
-    model = os.getenv("OPENAI_MODEL")
-    if not model:
-        logger.warning("OPENAI_MODEL environment variable is not set, using gpt-4o-mini")
-        return "gpt-4o-mini"
+def get_model() -> str:
+    model = os.getenv("OPENAI_MODEL", DEFAULT_MODEL)
+    logger.info(f"Using OpenAI model: {model}")
     return model
 
 
-def create_completion(messages: Iterable[ChatCompletionMessageParam]) -> str:
-    client: OpenAI = get_openai_client()
-    model = get_openai_model()
-    temperature = float(os.getenv("OPENAI_TEMPERATURE", 0))
+@functools.cache
+def get_temperature() -> float:
+    temperature = float(os.getenv("OPENAI_TEMPERATURE", DEFAULT_TEMPERATURE))
+    logger.info(f"Using OpenAI temperature: {temperature}")
+    return temperature
+
+
+def create(messages: Iterable[ChatCompletionMessageParam]) -> str:
+    client: OpenAI = get_client()
+    model = get_model()
+    temperature = get_temperature()
 
     completion = client.chat.completions.create(
         model=model,
@@ -44,10 +51,10 @@ def create_completion(messages: Iterable[ChatCompletionMessageParam]) -> str:
     return content
 
 
-def parse_completion(messages: Iterable[ChatCompletionMessageParam], response_format: type[BaseModel]) -> BaseModel:
-    client: OpenAI = get_openai_client()
-    model = get_openai_model()
-    temperature = float(os.getenv("OPENAI_TEMPERATURE", 0))
+def parse(messages: Iterable[ChatCompletionMessageParam], response_format: type[BaseModel]) -> BaseModel:
+    client: OpenAI = get_client()
+    model = get_model()
+    temperature = get_temperature()
 
     completion = client.beta.chat.completions.parse(
         model=model,
