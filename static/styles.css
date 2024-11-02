@@ -1,0 +1,42 @@
+#chat-container {
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#chat-box {
+    height: 400px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#messages {
+    list-style-type: none;
+    padding: 0;
+}
+
+#messages li {
+    margin-bottom: 10px;
+}
+
+#chat-form {
+    display: flex;
+    justify-content: space-between;
+}
+
+#message {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+#last-response {
+    width: 100%;
+    height: 100px;
+    margin-top: 10px;
+}

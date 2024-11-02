@@ -721,10 +721,12 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "click" },
+    { name = "fastapi" },
     { name = "gradio" },
     { name = "loguru" },
     { name = "openai" },
     { name = "python-dotenv" },
+    { name = "uvicorn" },
 ]
 
 [package.dev-dependencies]
@@ -739,10 +741,12 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "click", specifier = ">=8.1.7" },
+    { name = "fastapi", specifier = ">=0.115.3" },
     { name = "gradio", specifier = ">=5.3.0" },
     { name = "loguru", specifier = ">=0.7.2" },
     { name = "openai", specifier = ">=1.52.1" },
     { name = "python-dotenv", specifier = ">=1.0.1" },
+    { name = "uvicorn", specifier = ">=0.32.0" },
 ]
 
 [package.metadata.requires-dev]
