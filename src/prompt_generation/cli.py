@@ -29,11 +29,11 @@ def generate_response(message: str, history: list[dict[str, str]]) -> tuple[str,
     try:
         response = create(messages)
         logger.info("response: {}", response)
-        return "", history + [{"role": "user", "content": message}, {"role": "assistant", "content": response}]
+        return response, history + [{"role": "user", "content": message}, {"role": "assistant", "content": response}]
     except Exception as e:
         logger.error("unable to generate response: {}", e)
         error_msg = str(e)
-        return "", history + [{"role": "user", "content": message}, {"role": "assistant", "content": error_msg}]
+        return error_msg, history + [{"role": "user", "content": message}, {"role": "assistant", "content": error_msg}]
 
 
 def get_last_response(history: list[dict[str, str]]) -> str:
