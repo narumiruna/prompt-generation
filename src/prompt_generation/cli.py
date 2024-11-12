@@ -61,6 +61,10 @@ def main() -> None:
             generate_response,
             inputs=[msg, chatbot],
             outputs=[msg, chatbot],
+        ).then(
+            lambda x: "",  # Clear the input box
+            inputs=[],
+            outputs=[msg],
         ).then(get_last_response, inputs=[chatbot], outputs=[last_response])
 
     demo.queue().launch()
