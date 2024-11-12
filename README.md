@@ -5,6 +5,7 @@ A specialized Python application for generating system prompts from task descrip
 ## Features
 
 - 🎯 Intelligent prompt generation:
+
   - Task analysis and objective understanding
   - Reasoning-first approach with proper ordering
   - High-quality examples with placeholders
@@ -12,6 +13,7 @@ A specialized Python application for generating system prompts from task descrip
   - Clear and concise language
 
 - 🚀 Modern interface:
+
   - Gradio web UI with queue system
   - Persistent chat history
   - One-click response copying
@@ -59,7 +61,7 @@ OPENAI_TEMPERATURE=0                 # Model temperature (0-2), defaults to 0
 1. Run the application:
 
 ```bash
-prompt-generation
+uv run uvicorn app:app --reload
 ```
 
 2. The application will launch a web interface where you can:
@@ -68,11 +70,13 @@ prompt-generation
    - Copy results from the dedicated text area
 
 Example Input:
+
 ```
 Search for products that match a user's preference based on the provided input.
 ```
 
 The tool will analyze your input and generate a structured prompt following these guidelines:
+
 - Understanding core objectives and constraints
 - Organizing reasoning steps before conclusions
 - Including relevant examples with placeholders
@@ -99,11 +103,13 @@ uv pip install -e ".[dev]"
 ```
 
 Run tests:
+
 ```bash
 pytest
 ```
 
 Run linting:
+
 ```bash
 ruff check .
 ```
