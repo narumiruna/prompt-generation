@@ -1,5 +1,6 @@
 import json
 import os
+from typing import TypeAlias
 
 from dotenv import find_dotenv
 from dotenv import load_dotenv
@@ -11,6 +12,9 @@ from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from loguru import logger
+from openai.types.chat import ChatCompletionAssistantMessageParam
+from openai.types.chat import ChatCompletionSystemMessageParam
+from openai.types.chat import ChatCompletionUserMessageParam
 
 from prompt_generation.openai import create
 from prompt_generation.utils import load_text
@@ -27,6 +31,8 @@ templates = Jinja2Templates(directory="templates")
 prompt_file = os.getenv("META_PROMPT", "prompts/meta_prompt.txt")
 SYSTEM_PROMPT = load_text(prompt_file)
 
+MessageType: TypeAlias = ChatCompletionUserMessageParam | ChatCompletionAssistantMessageParam
+
 
 @app.post("/generate_response", response_class=JSONResponse)
 async def generate_response(message: str = Form(...), history: str = Form(...)) -> dict:
@@ -34,15 +40,21 @@ async def generate_response(message: str = Form(...), history: str = Form(...)) 
     logger.info("Received history: {}", history)
 
     try:
-        history_list = json.loads(history) if history else []
+        history_json = json.loads(history) if history else []
+        history_list: list[MessageType] = []
+        for hist in history_json:
+            if hist["role"] == "user":
+                history_list.append(ChatCompletionUserMessageParam(role="user", content=hist["content"]))
+            elif hist["role"] == "assistant":
+                history_list.append(ChatCompletionAssistantMessageParam(role="assistant", content=hist["content"]))
     except json.JSONDecodeError as e:
         logger.error("Invalid history format: {}", e)
         history_list = []
 
     messages = [
-        {"role": "system", "content": SYSTEM_PROMPT},
-        *[{"role": "user", "content": hist["content"]} for hist in history_list],
-        {"role": "user", "content": message},
+        ChatCompletionSystemMessageParam(role="system", content=SYSTEM_PROMPT),
+        *history_list,
+        ChatCompletionUserMessageParam(role="user", content=message),
     ]
 
     logger.info("messages: {}", messages)
@@ -50,14 +62,14 @@ async def generate_response(message: str = Form(...), history: str = Form(...)) 
     try:
         response = create(messages)
         logger.info("response: {}", response)
-        history_list.append({"role": "user", "content": message})
-        history_list.append({"role": "assistant", "content": response})
+        history_list.append(ChatCompletionUserMessageParam(role="user", content=message))
+        history_list.append(ChatCompletionAssistantMessageParam(role="assistant", content=response))
         return {"message": "", "history": history_list}
     except Exception as e:
         logger.error("Unable to generate response: {}", e)
         error_msg = str(e)
-        history_list.append({"role": "user", "content": message})
-        history_list.append({"role": "assistant", "content": error_msg})
+        history_list.append(ChatCompletionUserMessageParam(role="user", content=message))
+        history_list.append(ChatCompletionAssistantMessageParam(role="assistant", content=error_msg))
         return {"message": "", "history": history_list}
 
 
