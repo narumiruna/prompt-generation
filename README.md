@@ -1,25 +1,25 @@
 # prompt-generation
 
-A specialized Python application for generating system prompts from task descriptions. It follows structured guidelines to create effective prompts for language models, featuring reasoning-first approach, example generation, and format preservation. The tool provides a modern Gradio web interface for easy interaction.
+A specialized Python application for generating system prompts from task descriptions. It follows structured guidelines to create effective prompts for language models, featuring a reasoning-first approach, example generation, and format preservation. The tool provides a modern Gradio web interface for easy interaction.
 
 ## Features
 
-- 🎯 Intelligent prompt generation:
+- 🎯 **Intelligent Prompt Generation**:
 
-  - Task analysis and objective understanding
-  - Reasoning-first approach with proper ordering
-  - High-quality examples with placeholders
-  - Format preservation for complex prompts
-  - Clear and concise language
+  - Comprehensive task analysis and clear objective understanding
+  - Reasoning-first methodology with proper step ordering
+  - Inclusion of high-quality examples with placeholders
+  - Preservation of complex prompt formats
+  - Emphasis on clarity and conciseness
 
-- 🚀 Modern interface:
+- 🚀 **Modern Interface**:
 
   - Gradio web UI with queue system
   - Persistent chat history
   - One-click response copying
   - Real-time prompt generation
 
-- ⚙️ Flexible configuration:
+- ⚙️ **Flexible Configuration**:
   - Customizable system prompts
   - Multiple OpenAI model support
   - Adjustable temperature settings
@@ -28,19 +28,11 @@ A specialized Python application for generating system prompts from task descrip
 
 Requires Python 3.11 or higher.
 
-1. Install uv (Universal Virtualenv):
+Install uv:
 
-```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
-```
-
-2. Create virtual environment and install dependencies:
-
-```bash
-uv venv
-source .venv/bin/activate
-uv pip install -e .
-```
+    ```bash
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    ```
 
 ## Configuration
 
@@ -58,39 +50,40 @@ OPENAI_TEMPERATURE=0                 # Model temperature (0-2), defaults to 0
 
 ## Usage
 
-1. Run the application:
+1. **Run the application**:
 
-```bash
-uv run prompt-generation
-```
+   ```bash
+   uv run prompt-generation
+   ```
 
-2. The application will launch a web interface where you can:
+2. **Access the web interface**:
+
    - Input your task description or existing prompt
    - View generated prompts in the chat history
    - Copy results from the dedicated text area
 
-Example Input:
+   **Example Input**:
 
-```
-Search for products that match a user's preference based on the provided input.
-```
+   ```
+   Search for products that match a user's preference based on the provided input.
+   ```
 
-The tool will analyze your input and generate a structured prompt following these guidelines:
+   The tool analyzes your input and generates a structured prompt following key guidelines:
 
-- Understanding core objectives and constraints
-- Organizing reasoning steps before conclusions
-- Including relevant examples with placeholders
-- Preserving existing content when improving prompts
-- Using clear, specific language
+   - Understanding core objectives and constraints
+   - Organizing reasoning steps before conclusions
+   - Including relevant examples with placeholders
+   - Preserving existing content when improving prompts
+   - Using clear and specific language
 
-3. The generated prompt will be:
+3. **Utilize the generated prompt**:
    - Displayed in the chat history
    - Automatically copied to the "Latest AI Response" area
-   - Ready for use in your applications
+   - Ready for integration into your applications
 
 ## Development
 
-The project uses several development tools:
+The project utilizes several development tools:
 
 - `ruff` for linting and formatting
 - `mypy` for type checking
