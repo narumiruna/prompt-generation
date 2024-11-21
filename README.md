@@ -61,7 +61,7 @@ OPENAI_TEMPERATURE=0                 # Model temperature (0-2), defaults to 0
 1. Run the application:
 
 ```bash
-uv run uvicorn app:app --reload
+uv run prompt-generation
 ```
 
 2. The application will launch a web interface where you can:
