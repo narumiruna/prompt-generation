@@ -1,0 +1,13 @@
+- Agentic Workflows: Use explicit reminders for persistence, tool-calling, and planning in system prompts to maximize GPT-4.1's agentic capabilities.
+- Tool Calls: Define tools via the API, use clear names/descriptions, and provide usage examples in a dedicated section.
+- Prompting-Induced Planning & Chain-of-Thought: Prompt for explicit planning and reflection to improve step-by-step problem solving.
+- Agentic Task Workflow: Provide a high-level strategy and detailed step-by-step instructions for complex problem-solving tasks.
+- Long Context: Use GPT-4.1's 1M token context for complex tasks, but monitor for performance degradation with very large or complex contexts.
+- Tuning Context Reliance: Use explicit instructions to control whether the model uses only external context or also its internal knowledge.
+- Prompt Organization (Long Context): Place instructions at both the beginning and end of the context, or at least at the beginning.
+- Chain of Thought: Prompt the model to think step by step, and iteratively refine CoT instructions based on observed errors.
+- Instruction Following: Use high-level and detailed instructions, workflow steps, and examples; debug by checking for conflicts and adding examples.
+- Common Failure Modes: Add clarifying instructions to avoid adverse effects from tool-calling, repetitive sample phrases, and unwanted output formatting.
+- Prompt Structure: Use a clear, sectioned template for prompts, and customize as needed.
+- Delimiters: Use markdown for general prompts, XML for structure and metadata, and avoid JSON for large document input contexts.
+- Caveats: Use strong instructions for long outputs, and test/disable parallel tool calls if issues are observed.
