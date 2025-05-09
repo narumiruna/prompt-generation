@@ -1436,6 +1436,19 @@ wheels = [
 ]
 
 [[package]]
+name = "markdownify"
+version = "1.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "beautifulsoup4" },
+    { name = "six" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/2f/78/c48fed23c7aebc2c16049062e72de1da3220c274de59d28c942acdc9ffb2/markdownify-1.1.0.tar.gz", hash = "sha256:449c0bbbf1401c5112379619524f33b63490a8fa479456d41de9dc9e37560ebd", size = 17127 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/64/11/b751af7ad41b254a802cf52f7bc1fca7cabe2388132f2ce60a1a6b9b9622/markdownify-1.1.0-py3-none-any.whl", hash = "sha256:32a5a08e9af02c8a6528942224c91b933b4bd2c7d078f9012943776fc313eeef", size = 13901 },
+]
+
+[[package]]
 name = "markupsafe"
 version = "2.1.5"
 source = { registry = "https://pypi.org/simple" }
@@ -2680,6 +2693,7 @@ dependencies = [
     { name = "fastapi" },
     { name = "gradio" },
     { name = "loguru" },
+    { name = "markdownify" },
     { name = "openai" },
     { name = "openai-agents" },
     { name = "python-dotenv" },
@@ -2705,6 +2719,7 @@ requires-dist = [
     { name = "fastapi", specifier = ">=0.115.3" },
     { name = "gradio", specifier = ">=5.3.0" },
     { name = "loguru", specifier = ">=0.7.2" },
+    { name = "markdownify", specifier = ">=1.1.0" },
     { name = "openai", specifier = ">=1.52.1" },
     { name = "openai-agents", specifier = ">=0.0.14" },
     { name = "python-dotenv", specifier = ">=1.0.1" },
